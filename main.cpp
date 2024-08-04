@@ -68,8 +68,8 @@ DWORD MainThread(HMODULE Module)
     Engine->GameViewport->ViewportConsole = static_cast<SDK::UConsole*>(NewObject);
 
 
-    //main code
-    MyGameController->CL_Host_ForceResetMatch();
+    //you can call a function here
+    
 
 
     return 0;
