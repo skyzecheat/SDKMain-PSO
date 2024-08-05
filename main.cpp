@@ -23,12 +23,13 @@ DWORD MainThread(HMODULE Module)
 
     SDK::ASP_Character_C* MyGameChar = static_cast<SDK::ASP_Character_C*>(MyController->Character);
 
+
     SDK::AMP_GameState_C* MyGameState = static_cast<SDK::AMP_GameState_C*>(MyGameController->MP_GameState);
 
     SDK::AMP_PlayerState_C* MyPlayerState = static_cast<SDK::AMP_PlayerState_C*>(MyGameController->PlayerState);
 
-    std::cout << Engine->ConsoleClass->GetFullName() << std::endl;
 
+    std::cout << Engine->ConsoleClass->GetFullName() << std::endl;
 
     for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
     {
@@ -39,6 +40,7 @@ DWORD MainThread(HMODULE Module)
 
         if (!Obj->IsDefaultObject())
             continue;
+
 
 
         if (Obj->IsA(SDK::APawn::StaticClass()) || Obj->HasTypeFlag(SDK::EClassCastFlags::Pawn))
@@ -53,13 +55,12 @@ DWORD MainThread(HMODULE Module)
 
     for (SDK::AActor* Actor : Actors)
     {
-
         if (!Actor || !Actor->IsA(SDK::EClassCastFlags::Pawn) || !Actor->IsA(SDK::APawn::StaticClass()))
             continue;
 
         SDK::APawn* Pawn = static_cast<SDK::APawn*>(Actor);
-
     }
+
 
     SDK::UInputSettings::GetDefaultObj()->ConsoleKeys[0].KeyName = SDK::UKismetStringLibrary::Conv_StringToName(L"F2");
 
@@ -67,9 +68,8 @@ DWORD MainThread(HMODULE Module)
 
     Engine->GameViewport->ViewportConsole = static_cast<SDK::UConsole*>(NewObject);
 
-
-    //you can call a function here
-    
+    //call host function
+    MyGameController->CL_Host_ForceResetMatch();
 
 
     return 0;
